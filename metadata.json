@@ -1,0 +1,5 @@
+{
+  "name": "SmartSlider",
+  "description": "An AI-powered web application that reviews PDF presentations for technical correctness, improvements, and strengths using the Gemini API.",
+  "requestFramePermissions": []
+}
