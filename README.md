@@ -1,20 +1,55 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# SmartSlider - AI-Powered Presentation Reviewer
 
-# Run and deploy your AI Studio app
+SmartSlider is a web application that analyzes technical presentation slides (PDF or PPTX) using Google's Gemini 3 Pro model. It identifies errors, suggests quality enhancements, and highlights pedagogical strengths.
 
-This contains everything you need to run your app locally.
+## 🚀 Developer Guide
 
-View your app in AI Studio: https://ai.studio/apps/drive/1006e1LVgfeWc7yTvjB1H0n_e3Afr8ElV
+Follow these steps to set up and run the project locally.
 
-## Run Locally
+### Prerequisites
 
-**Prerequisites:**  Node.js
+*   **Node.js** (v18 or higher)
+*   A **Google Gemini API Key** (Get one here: [aistudio.google.com](https://aistudio.google.com))
 
+### Installation & Setup
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/Newton-School/SmartSlider.git
+    cd SmartSlider
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Environment Variables**
+    Create a `.env` file in the root directory. Add your Gemini API Key with the `VITE_` prefix:
+    
+    ```env
+    VITE_API_KEY=your_actual_gemini_api_key_here
+    ```
+    
+    > **Note:** The app uses `VITE_API_KEY` for local development security.
+
+4.  **Run the Application**
+    ```bash
+    npm run dev
+    ```
+    
+    The app will start at `http://localhost:5173`.
+
+### How to Verify
+
+1.  Open `http://localhost:5173` in your browser.
+2.  Enter a dummy subject in the "Subject / Course Name" field (e.g., "Introduction to React").
+3.  Upload a **PDF** or **PPTX** file (must be under 100MB).
+4.  Wait for the progress bar to complete ("Reviewing...").
+5.  Verify that all 3 result cards (Errors, Improvements, Strengths) are populated.
+
+### Troubleshooting
+
+*   **Error: "process is not defined" or API Key missing**: Ensure you created the `.env` file in the root directory and named the variable `VITE_API_KEY`.
+*   **Error: "400 Bad Request"**: The file might be corrupted or in an unsupported legacy format (old `.ppt` binary files). Only modern `.pptx` (XML-based) and `.pdf` files are supported.
+*   **Stuck at 95%**: Check the browser console (F12) for network errors.

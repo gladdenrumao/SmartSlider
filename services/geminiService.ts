@@ -44,7 +44,14 @@ const analysisSchema: Schema = {
 };
 
 export const analyzePresentation = async (base64Data: string, mimeType: string, courseName: string): Promise<AnalysisResult> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Support both local dev (VITE_API_KEY) and production (API_KEY)
+  const apiKey = (import.meta as any).env?.VITE_API_KEY || process.env.API_KEY;
+  
+  if (!apiKey) {
+    throw new Error("API Key is missing. Please set VITE_API_KEY in .env");
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
   
   // Use provided course name or default to a general technical context
   const subjectContext = courseName && courseName.trim() ? courseName : "General Technical Topic";
